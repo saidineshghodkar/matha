@@ -1,0 +1,2088 @@
+Restaurant Website with Real Images
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathA VINDHUSHALA | Multicuisine Family Restaurant | Anantapur</title>
+    <meta name="description" content="MathA VINDHUSHALA - Authentic multicuisine family restaurant in Anantapur. Dine-in, Takeaway & No-contact delivery. Rated 4.5★ by 215+ guests.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Serif+Telugu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        :root {
+            --gold: #F4A825;
+            --gold-light: #FDD835;
+            --gold-dark: #C7911B;
+            --amber: #FF8F00;
+            --amber-light: #FFB74D;
+            --coral: #FF6F61;
+            --coral-light: #FF8A80;
+            --cream: #FFF8E1;
+            --cream-dark: #FFECB3;
+            --white: #FFFFFF;
+            --off-white: #FFFDF7;
+            --dark: #1A1A1A;
+            --dark-2: #2D2D2D;
+            --text: #333333;
+            --text-light: #666666;
+            --text-lighter: #888888;
+            --green: #43A047;
+            --green-light: #E8F5E9;
+            --red: #E53935;
+            --red-light: #FFEBEE;
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+            --shadow-xl: 0 16px 60px rgba(0, 0, 0, 0.18);
+            --radius-sm: 10px;
+            --radius: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 999px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            scroll-padding-top: 80px;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--off-white);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== CUSTOM CURSOR ========== */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .custom-cursor {
+                display: block;
+            }
+        }
+
+        /* ========== PRELOADER ========== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: #FFF8E1;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .preloader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            animation: preloaderPulse 1.2s ease-in-out infinite;
+        }
+        .preloader-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .preloader-dots span {
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+        .preloader-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .preloader-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes preloaderPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(0.95);
+            }
+        }
+        @keyframes dotBounce {
+            0%,
+            80%,
+            100% {
+                transform: scale(0.6);
+                opacity: 0.4;
+            }
+            40% {
+                transform: scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            padding: 14px 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 8px 0;
+            box-shadow: var(--shadow);
+        }
+        .navbar .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            transition: var(--transition);
+        }
+        .navbar.scrolled .nav-logo {
+            color: var(--dark);
+        }
+        .nav-logo .logo-icon {
+            width: 46px;
+            height: 46px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 800;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(244, 168, 37, 0.4);
+        }
+        .navbar.scrolled .nav-logo .logo-icon {
+            width: 38px;
+            height: 38px;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .nav-logo .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            transition: var(--transition);
+        }
+        .nav-logo .logo-text span {
+            display: block;
+            font-size: 0.6rem;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 3px;
+            font-weight: 400;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            font-size: 0.88rem;
+            transition: var(--transition-fast);
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+        .navbar.scrolled .nav-links a {
+            color: var(--text);
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .navbar.scrolled .nav-links a:hover,
+        .navbar.scrolled .nav-links a.active {
+            background: var(--cream-dark);
+            color: var(--dark);
+        }
+        .nav-links .btn-nav {
+            background: var(--gold) !important;
+            color: #fff !important;
+            font-weight: 600;
+            padding: 10px 22px !important;
+            box-shadow: 0 4px 18px rgba(244, 168, 37, 0.35);
+            transition: var(--transition);
+        }
+        .nav-links .btn-nav:hover {
+            background: var(--gold-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(244, 168, 37, 0.5);
+        }
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 10001;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+        .menu-toggle span {
+            width: 26px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: var(--transition-fast);
+        }
+        .navbar.scrolled .menu-toggle span {
+            background: var(--dark);
+        }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&q=80');
+        }
+        .hero-slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600&q=80');
+        }
+        .hero-slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80');
+        }
+        .hero-slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80');
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.55) 0%,
+                    rgba(0, 0, 0, 0.45) 30%,
+                    rgba(0, 0, 0, 0.55) 70%,
+                    rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 24px;
+            max-width: 800px;
+            animation: fadeInUp 1s ease forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            animation: fadeInUp 0.8s ease 0.35s both;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+        .hero-title .highlight {
+            color: var(--gold-light);
+            position: relative;
+            display: inline-block;
+        }
+        .hero-subtitle {
+            font-family: 'Noto Serif Telugu', serif;
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 6px;
+            animation: fadeInUp 0.8s ease 0.45s both;
+        }
+        .hero-rating-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            animation: fadeInUp 0.8s ease 0.55s both;
+        }
+        .hero-stars {
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+        }
+        .hero-rating-num {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .hero-review-count {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+        .hero-price-badge {
+            display: inline-block;
+            background: rgba(244, 168, 37, 0.25);
+            border: 1px solid rgba(244, 168, 37, 0.5);
+            color: var(--gold-light);
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 22px;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        .hero-tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 22px;
+            animation: fadeInUp 0.8s ease 0.65s both;
+        }
+        .hero-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 7px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.78rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition-fast);
+        }
+        .hero-tag:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .hero-tag i {
+            color: var(--gold-light);
+            font-size: 0.7rem;
+        }
+        .hero-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.75s both;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            letter-spacing: 0.4px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        .btn:hover::after {
+            transform: scaleX(1);
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(244, 168, 37, 0.4);
+        }
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(244, 168, 37, 0.5);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.7;
+            animation: bounceDown 2.5s infinite;
+        }
+        @keyframes bounceDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(14px);
+            }
+        }
+
+        /* ========== SECTION COMMON ========== */
+        section {
+            padding: 90px 24px;
+            position: relative;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .section-tag {
+            display: inline-block;
+            color: var(--amber);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            background: var(--cream-dark);
+            padding: 5px 16px;
+            border-radius: var(--radius-full);
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            color: var(--dark);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .section-line {
+            width: 50px;
+            height: 4px;
+            background: var(--gold);
+            margin: 0 auto 14px;
+            border-radius: 2px;
+        }
+        .section-desc {
+            color: var(--text-light);
+            max-width: 580px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-section {
+            background: #fff;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+        .about-image-col {
+            position: relative;
+        }
+        .about-img-main {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        .about-img-main:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        .about-float-card {
+            position: absolute;
+            bottom: -28px;
+            right: -28px;
+            background: #fff;
+            padding: 18px 22px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: floatCard 4.5s ease-in-out infinite;
+            z-index: 2;
+        }
+        @keyframes floatCard {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-16px);
+            }
+        }
+        .about-float-card .icon-circle {
+            width: 48px;
+            height: 48px;
+            background: #FFF8E1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+        }
+        .about-float-card .info h4 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin: 0;
+            font-weight: 700;
+        }
+        .about-float-card .info span {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 14px;
+            line-height: 1.25;
+        }
+        .about-content .lead {
+            color: var(--text-light);
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            background: #FFFDF7;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: var(--transition-fast);
+            border: 1px solid #f5f0e0;
+        }
+        .about-feature:hover {
+            background: #FFF8E1;
+            transform: translateX(5px);
+            border-color: var(--cream-dark);
+        }
+        .about-feature i {
+            color: var(--green);
+            font-size: 0.9rem;
+        }
+        .about-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge-dinein {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+        .badge-takeaway {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        .badge-delivery {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        /* ========== STATS BANNER ========== */
+        .stats-banner {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1f0a 40%, #1a1a1a 100%);
+            padding: 60px 24px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 50%, rgba(244, 168, 37, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 50%, rgba(255, 111, 97, 0.08) 0%, transparent 50%);
+            z-index: 1;
+        }
+        .stats-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .stats-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            margin-bottom: 8px;
+        }
+        .stats-banner .highlight-text {
+            color: var(--gold-light);
+        }
+        .stats-banner p {
+            opacity: 0.8;
+            margin-bottom: 28px;
+            font-size: 0.95rem;
+        }
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-light);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.82rem;
+            opacity: 0.75;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        /* ========== MENU SECTION ========== */
+        .menu-section {
+            background: #FFFDF7;
+        }
+        .menu-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+        .menu-tab {
+            padding: 10px 20px;
+            border-radius: var(--radius-full);
+            border: 2px solid #e8e0d0;
+            background: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: var(--transition-fast);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            letter-spacing: 0.3px;
+        }
+        .menu-tab:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            background: #FFFDF7;
+        }
+        .menu-tab.active {
+            background: var(--gold);
+            color: #fff;
+            border-color: var(--gold);
+            box-shadow: 0 4px 16px rgba(244, 168, 37, 0.3);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 22px;
+        }
+        .menu-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f0ebe0;
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--cream-dark);
+        }
+        .menu-card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-card-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.15));
+        }
+        .menu-card-image .veg-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            z-index: 2;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .veg-indicator.veg {
+            border: 2px solid #43A047;
+            color: #43A047;
+        }
+        .veg-indicator.nonveg {
+            border: 2px solid #E53935;
+            color: #E53935;
+        }
+        .menu-card-body {
+            padding: 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-card-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--dark);
+            margin-bottom: 3px;
+            font-weight: 700;
+        }
+        .menu-card-body .desc {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            flex: 1;
+            line-height: 1.5;
+        }
+        .menu-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-price {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--amber);
+        }
+        .menu-add-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(244, 168, 37, 0.3);
+        }
+        .menu-add-btn:hover {
+            background: var(--coral);
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.4);
+        }
+
+        /* ========== GALLERY STRIP ========== */
+        .gallery-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            overflow: hidden;
+        }
+        .gallery-strip img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: var(--transition);
+            filter: brightness(0.9);
+        }
+        .gallery-strip img:hover {
+            filter: brightness(1.1);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        /* ========== REVIEWS SECTION ========== */
+        .reviews-section {
+            background: #fff;
+        }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 22px;
+        }
+        .review-card {
+            background: #FFFDF7;
+            border: 1px solid #f0ebe0;
+            border-radius: var(--radius);
+            padding: 26px;
+            transition: var(--transition);
+            position: relative;
+        }
+        .review-card:hover {
+            box-shadow: var(--shadow);
+            border-color: transparent;
+            transform: translateY(-4px);
+        }
+        .review-card .quote-icon {
+            font-size: 2.2rem;
+            color: var(--gold);
+            opacity: 0.4;
+            margin-bottom: 6px;
+        }
+        .review-stars {
+            color: #F9A825;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+        .review-text {
+            font-size: 0.88rem;
+            color: var(--text);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cream-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--gold-dark);
+            font-size: 0.85rem;
+        }
+        .review-author-info h5 {
+            font-size: 0.88rem;
+            color: var(--dark);
+            margin: 0;
+            font-weight: 600;
+        }
+        .review-author-info span {
+            font-size: 0.73rem;
+            color: var(--text-lighter);
+        }
+        .google-link-card {
+            text-align: center;
+            margin-top: 32px;
+        }
+        .google-link-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 2px solid #e8e0d0;
+            padding: 12px 26px;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            font-size: 0.9rem;
+        }
+        .google-link-card a:hover {
+            border-color: #4285F4;
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+        .google-link-card a i.fa-google {
+            color: #4285F4;
+            font-size: 1.1rem;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-section {
+            background: #FFFDF7;
+            padding: 90px 24px;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+        .map-wrapper {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+            min-height: 420px;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            border: none;
+        }
+        .contact-card {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1px solid #f0ebe0;
+        }
+        .contact-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f0e5;
+        }
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        .contact-icon-circle {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .contact-icon-circle.loc {
+            background: #FFEBEE;
+            color: #c62828;
+        }
+        .contact-icon-circle.ph {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        .contact-icon-circle.clk {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+        .contact-icon-circle.prc {
+            background: #F3E5F5;
+            color: #6A1B9A;
+        }
+        .contact-icon-circle.cod {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+        .contact-item .info h5 {
+            font-size: 0.82rem;
+            color: var(--dark);
+            margin: 0 0 1px;
+            font-weight: 600;
+        }
+        .contact-item .info p,
+        .contact-item .info a {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0;
+            line-height: 1.5;
+        }
+        .contact-item .info a:hover {
+            color: var(--gold-dark);
+        }
+        .hours-inline {
+            font-size: 0.84rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            max-width: 240px;
+        }
+        .hours-inline .day {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1f0a 60%, #1a1a1a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(244, 168, 37, 0.1) 0%, transparent 60%);
+            z-index: 1;
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            margin-bottom: 10px;
+        }
+        .cta-section p {
+            opacity: 0.8;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+        .cta-section .btn-primary {
+            background: #fff;
+            color: var(--dark);
+            box-shadow: 0 6px 24px rgba(255, 255, 255, 0.2);
+        }
+        .cta-section .btn-primary:hover {
+            background: var(--gold-light);
+            box-shadow: 0 12px 36px rgba(244, 168, 37, 0.4);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 56px 24px 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            margin-bottom: 14px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+        }
+        .footer-col p,
+        .footer-col li {
+            font-size: 0.82rem;
+            margin-bottom: 7px;
+            line-height: 1.6;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        .footer-col ul li a:hover {
+            color: var(--gold-light);
+            padding-left: 4px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition-fast);
+            font-size: 0.85rem;
+        }
+        .footer-social a:hover {
+            background: var(--gold);
+            color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 16px;
+            font-size: 0.78rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        /* ========== TOAST ========== */
+        .custom-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: #fff;
+            padding: 12px 26px;
+            border-radius: var(--radius-full);
+            font-size: 0.88rem;
+            font-weight: 500;
+            z-index: 99999;
+            box-shadow: var(--shadow-xl);
+            animation: toastIn 0.4s ease, toastOut 0.4s ease 2s forwards;
+            white-space: nowrap;
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes toastOut {
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+        }
+
+        /* ========== FLOATING BUTTONS ========== */
+        .floating-btns {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .float-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            color: #fff;
+        }
+        .float-btn.scroll-top {
+            background: var(--dark);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        .float-btn.scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .float-btn.scroll-top:hover {
+            background: var(--gold);
+            transform: translateY(-4px);
+        }
+        .float-btn.call {
+            background: var(--green);
+            animation: pulseCall 2.2s infinite;
+            text-decoration: none;
+        }
+        @keyframes pulseCall {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(67, 160, 71, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(67, 160, 71, 0);
+            }
+        }
+        .float-btn.call:hover {
+            animation: none;
+            background: #2E7D32;
+            transform: scale(1.1);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .about-float-card {
+                bottom: -14px;
+                right: 10px;
+                padding: 14px 18px;
+            }
+            .gallery-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 100px 28px 30px;
+                gap: 4px;
+                transition: var(--transition);
+                box-shadow: var(--shadow-xl);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                display: block;
+                padding: 12px 16px;
+                font-size: 0.95rem;
+                color: var(--text) !important;
+            }
+            .nav-links a:hover,
+            .nav-links a.active {
+                background: var(--cream-dark) !important;
+                color: var(--dark) !important;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .menu-toggle span {
+                background: #fff;
+            }
+            .navbar.scrolled .menu-toggle span {
+                background: var(--dark);
+            }
+            .hero {
+                min-height: 90vh;
+            }
+            section {
+                padding: 56px 16px;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-row {
+                gap: 22px;
+            }
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            .floating-btns {
+                bottom: 16px;
+                right: 16px;
+                gap: 8px;
+            }
+            .float-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 0.85rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+                font-size: 0.82rem;
+            }
+            .menu-tabs {
+                gap: 5px;
+            }
+            .menu-tab {
+                padding: 7px 12px;
+                font-size: 0.75rem;
+            }
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            .gallery-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- ==================== PRELOADER ==================== -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">MathA</div>
+        <div class="preloader-dots">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- ==================== FLOATING BUTTONS ==================== -->
+    <div class="floating-btns">
+        <a href="tel:+916281122990" class="float-btn call" aria-label="Call restaurant" title="Call Now">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+        <button class="float-btn scroll-top" id="scrollTopBtn" aria-label="Scroll to top" title="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">MathA<span>VINDHUSHALA</span></div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn-nav">Reserve Table</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-slider" id="heroSlider">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-badge">✦ Multicuisine Family Restaurant ✦</span>
+            <h1 class="hero-title">MathA <span class="highlight">VINDHUSHALA</span></h1>
+            <p class="hero-subtitle">మఠ విందుశాల మల్టీకుసిన్ ఫ్యామిలీ రెస్టారెంట్</p>
+            <div class="hero-rating-row">
+                <span class="hero-stars">★★★★★</span>
+                <span class="hero-rating-num">4.5</span>
+                <span class="hero-review-count">(215 Google Reviews)</span>
+            </div>
+            <div class="hero-price-badge">💰 ₹200 – ₹1,400 per person</div>
+            <div class="hero-tags-row">
+                <span class="hero-tag"><i class="fas fa-utensils"></i> Dine-in</span>
+                <span class="hero-tag"><i class="fas fa-shopping-bag"></i> Takeaway</span>
+                <span class="hero-tag"><i class="fas fa-truck"></i> No-contact Delivery</span>
+            </div>
+            <div class="hero-btns">
+                <a href="#menu" class="btn btn-primary"><i class="fas fa-book-open"></i> Explore Menu</a>
+                <a href="https://www.google.co.in/maps/place/MathA+VINDHUSHALA+Multicuisine+Family+Restaurant/@14.6868815,77.6074559,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb14bf130fdc479:0x83987bf82421b673!8m2!3d14.6868815!4d77.6074559!16s%2Fg%2F11vw_ql_8v?entry=ttu"
+                target="_blank" rel="noopener" class="btn btn-outline"><i class="fas fa-map-marker-alt"></i> Get Directions</a>
+                <a href="tel:+916281122990" class="btn btn-outline"><i class="fas fa-phone-alt"></i> Call Us</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll to explore</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid" data-aos="fade-up" data-aos-duration="800">
+                <div class="about-image-col">
+                    <img
+                    src="https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=700&q=80"
+                    alt="MathA VINDHUSHALA Restaurant Interior"
+                    class="about-img-main"
+                    loading="lazy"
+                    onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80'"
+                    >
+                    <div class="about-float-card">
+                        <div class="icon-circle"><i class="fas fa-star"></i></div>
+                        <div class="info">
+                            <h4>4.5 ★</h4>
+                            <span>215+ Happy Guests</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">Our Story</span>
+                    <h3>A Culinary Journey in the Heart of Anantapur</h3>
+                    <p class="lead">
+                        Welcome to <strong>MathA VINDHUSHALA</strong> — a premier multicuisine family restaurant
+                        located at the Pasupala Convention Building on Gooty Road, Old Town, Anantapur.
+                        We blend traditional Andhra flavors with contemporary culinary artistry in a warm,
+                        family-friendly ambiance perfect for every occasion.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Hygienic Kitchen</div>
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Fresh Ingredients Daily</div>
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Ample Free Parking</div>
+                        <div class="about-feature"><i class="fas fa-check-circle"></i> Family Banquet Hall</div>
+                    </div>
+                    <div class="about-badges">
+                        <span class="badge badge-dinein"><i class="fas fa-utensils"></i> Dine-in</span>
+                        <span class="badge badge-takeaway"><i class="fas fa-shopping-bag"></i> Takeaway</span>
+                        <span class="badge badge-delivery"><i class="fas fa-truck"></i> No-contact Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STATS BANNER ==================== -->
+    <section class="stats-banner" data-aos="fade-up" data-aos-duration="800">
+        <div class="stats-content">
+            <h2>✨ The <span class="highlight-text">MathA</span> Experience</h2>
+            <p>Where every dish tells a story — from traditional Andhra thalis to global cuisines, all under one roof.</p>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Menu Items</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.5★</div>
+                    <div class="stat-label">Avg Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">215+</div>
+                    <div class="stat-label">Reviews</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10PM</div>
+                    <div class="stat-label">Open Till</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MENU SECTION ==================== -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="700">
+                <span class="section-tag">Our Menu</span>
+                <h2 class="section-title">Culinary Delights</h2>
+                <div class="section-line"></div>
+                <p class="section-desc">Explore our carefully crafted multicuisine offerings — from Andhra classics to North Indian favorites, Chinese delights, and more.</p>
+            </div>
+            <div class="menu-tabs" data-aos="fade-up" data-aos-duration="700">
+                <button class="menu-tab active" data-category="all">All Dishes</button>
+                <button class="menu-tab" data-category="andhra">Andhra Specials</button>
+                <button class="menu-tab" data-category="north">North Indian</button>
+                <button class="menu-tab" data-category="chinese">Chinese</button>
+                <button class="menu-tab" data-category="tandoor">Tandoor & Grill</button>
+                <button class="menu-tab" data-category="beverages">Beverages</button>
+            </div>
+            <div class="menu-grid" id="menuGrid" data-aos="fade-up" data-aos-duration="700"></div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY STRIP ==================== -->
+    <section class="gallery-strip" id="gallery" data-aos="fade-up" data-aos-duration="800">
+        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4e23e?w=500&q=80" alt="Delicious Indian food" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80'">
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80" alt="Biryani" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4e23e?w=500&q=80'">
+        <img src="https://images.unsplash.com/photo-1606491956689-68ea65089f40?w=500&q=80" alt="Indian curry" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80'">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="Fresh salad" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1606491956689-68ea65089f40?w=500&q=80'">
+    </section>
+
+    <!-- ==================== REVIEWS SECTION ==================== -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="700">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">What Our Guests Say</h2>
+                <div class="section-line"></div>
+                <p class="section-desc">Rated <strong>4.5★</strong> by <strong>215+</strong> happy diners on Google. Here's what they have to say.</p>
+            </div>
+            <div class="reviews-grid" data-aos="fade-up" data-aos-duration="700">
+                <div class="review-card">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Best family restaurant in Anantapur! The biryani is absolutely divine, and the service is top-notch. The ambiance at Pasupala Convention Building is perfect for family dinners."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">RK</div>
+                        <div class="review-author-info"><h5>Ravi Kumar</h5><span>Google Review • 3 weeks ago</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Amazing multicuisine options! Tried their Andhra thali and Chinese combo — both fantastic. Clean washrooms, ample parking, and courteous staff."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">SP</div>
+                        <div class="review-author-info"><h5>Sai Priya</h5><span>Google Review • 1 month ago</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">"Great value! The ₹200–1,400 range means there's something for everyone. Love their no-contact delivery — food arrives hot and well-packaged every time."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">MA</div>
+                        <div class="review-author-info"><h5>Mohammad Ali</h5><span>Google Review • 2 months ago</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="google-link-card" data-aos="fade-up" data-aos-duration="700">
+                <a href="https://www.google.co.in/maps/place/MathA+VINDHUSHALA+Multicuisine+Family+Restaurant/@14.6868815,77.6074559,17z/data=!4m8!3m7!1s0x3bb14bf130fdc479:0x83987bf82421b673!8m2!3d14.6868815!4d77.6074559!9m1!1b1!16s%2Fg%2F11vw_ql_8v?entry=ttu"
+                target="_blank" rel="noopener">
+                <i class="fab fa-google"></i> Read all 215+ reviews on Google Maps <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONTACT & MAP SECTION ==================== -->
+<section class="contact-section" id="contact">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="700">
+            <span class="section-tag">Find Us</span>
+            <h2 class="section-title">Location & Contact</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="contact-grid" data-aos="fade-up" data-aos-duration="700">
+            <div class="map-wrapper">
+                <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.9!2d77.6074559!3d14.6868815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb14bf130fdc479%3A0x83987bf82421b673!2sMathA%20VINDHUSHALA%20Multicuisine%20Family%20Restaurant!5e0!3m2!1sen!2sin!4v1717000000000!5m2!1sen!2sin"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="MathA VINDHUSHALA Location Map">
+            </iframe>
+        </div>
+        <div class="contact-card">
+            <h3>📍 Visit Us</h3>
+            <p style="color:var(--text-light);font-size:0.88rem;">We're conveniently located on Gooty Road in Old Town, Anantapur — right at the Pasupala Convention Building.</p>
+            <div class="contact-item">
+                <div class="contact-icon-circle loc"><i class="fas fa-map-pin"></i></div>
+                <div class="info"><h5>Address</h5><p>Pasupala Convention Building, Gooty Rd, Old Town, Anantapur, Andhra Pradesh 515005</p></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-circle cod"><i class="fas fa-map-marked-alt"></i></div>
+                <div class="info"><h5>Plus Code</h5><p>MJP4+QX Anantapur, Andhra Pradesh</p></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-circle ph"><i class="fas fa-phone-alt"></i></div>
+                <div class="info"><h5>Phone</h5><a href="tel:+916281122990">062811 22990</a></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-circle clk"><i class="fas fa-clock"></i></div>
+                <div class="info"><h5>Opening Hours</h5>
+                    <div class="hours-inline"><span class="day">Mon – Sun</span><span>11 AM – 10 PM</span></div>
+                    <p style="font-size:0.78rem;color:var(--green);margin-top:2px;">🟢 Open now · Closes 10 PM</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-circle prc"><i class="fas fa-rupee-sign"></i></div>
+                <div class="info"><h5>Price Range</h5><p>₹200 – ₹1,400 per person <span style="font-size:0.73rem;color:var(--text-lighter);">(reported by 77 people)</span></p></div>
+            </div>
+            <a href="https://www.google.co.in/maps/place/MathA+VINDHUSHALA+Multicuisine+Family+Restaurant/@14.6868815,77.6074559,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb14bf130fdc479:0x83987bf82421b673!8m2!3d14.6868815!4d77.6074559!16s%2Fg%2F11vw_ql_8v?entry=ttu"
+            target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;margin-top:6px;">
+            <i class="fas fa-directions"></i> Open in Google Maps
+        </a>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ==================== CTA SECTION ==================== -->
+<section class="cta-section" data-aos="fade-up" data-aos-duration="800">
+    <div class="cta-content">
+        <h2>Ready for a Memorable Dining Experience?</h2>
+        <p>Join us at MathA VINDHUSHALA for an unforgettable culinary journey. Reserve your table or order online now!</p>
+        <a href="tel:+916281122990" class="btn btn-primary"><i class="fas fa-phone-alt"></i> Call to Reserve</a>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>MathA VINDHUSHALA</h4>
+            <p>A multicuisine family restaurant serving authentic flavors in the heart of Anantapur, Andhra Pradesh.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Our Services</h4>
+            <ul>
+                <li><a href="#">🍽️ Dine-in</a></li>
+                <li><a href="#">🛍️ Takeaway</a></li>
+                <li><a href="#">🚚 No-contact Delivery</a></li>
+                <li><a href="#">🎉 Party Hall Booking</a></li>
+                <li><a href="#">📋 Bulk Orders</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Pasupala Convention Building, Gooty Rd, Old Town, Anantapur, AP 515005</p>
+            <p><i class="fas fa-phone-alt"></i> <a href="tel:+916281122990" style="color:#aaa;">062811 22990</a></p>
+            <p><i class="fas fa-clock"></i> Open Daily: 11 AM – 10 PM</p>
+            <p><i class="fas fa-tag"></i> MJP4+QX Anantapur</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 MathA VINDHUSHALA Multicuisine Family Restaurant. All rights reserved. | Designed with ❤️ in Anantapur</p>
+    </div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js">
+</script>
+<script>
+    (function() {
+        // ========== PRELOADER ==========
+        const preloader = document.getElementById('preloader');
+        const hidePreloader = () => {
+            preloader.classList.add('hidden');
+        };
+        window.addEventListener('load', () => setTimeout(hidePreloader, 600));
+        setTimeout(() => {
+            if (!preloader.classList.contains('hidden')) hidePreloader();
+        }, 2500);
+
+        // ========== AOS INIT ==========
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
+        // ========== CUSTOM CURSOR ==========
+        const cursor = document.getElementById('customCursor');
+        if (cursor && window.innerWidth >= 1024) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+            });
+            // Enlarge on hover over clickable elements
+            document.querySelectorAll('a, button, .menu-card, .review-card').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.6)');
+                el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+            });
+        }
+
+        // ========== NAVBAR SCROLL ==========
+        const navbar = document.getElementById('navbar');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        function handleScroll() {
+            const scrollY = window.scrollY;
+            navbar.classList.toggle('scrolled', scrollY > 60);
+            scrollTopBtn.classList.toggle('visible', scrollY > 500);
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ========== MOBILE MENU ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ========== ACTIVE NAV LINK ==========
+        const sections = document.querySelectorAll('section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a:not(.btn-nav)');
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 160) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navAnchors.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+        // ========== HERO SLIDER ==========
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 4500);
+
+        // ========== MENU DATA ==========
+        const menuItems = [
+            { name: 'Andhra Chicken Biryani', category: 'andhra',
+                desc: 'Fragrant basmati rice layered with tender chicken & authentic Andhra spices, served with raita.',
+                price: '₹280', img: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Gutti Vankaya Curry', category: 'andhra',
+                desc: 'Stuffed baby brinjals simmered in a rich, aromatic peanut & sesame gravy — an Andhra classic.',
+                price: '₹220', img: 'https://images.unsplash.com/photo-1606491956689-68ea65089f40?w=400&q=80',
+                veg: 'veg' },
+            { name: 'Natukodi Pulusu', category: 'andhra',
+                desc: 'Country chicken cooked in tangy tamarind gravy with traditional village-style spices.',
+                price: '₹350', img: 'https://images.unsplash.com/photo-1563379091339-03b21ab4e23e?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Butter Chicken', category: 'north',
+                desc: 'Creamy tomato-based curry with tender tandoori chicken, finished with butter & fenugreek.',
+                price: '₹320', img: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Paneer Tikka Masala', category: 'north',
+                desc: 'Char-grilled paneer cubes in a velvety spiced tomato cream sauce — a vegetarian delight.',
+                price: '₹260', img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80',
+                veg: 'veg' },
+            { name: 'Dal Makhani', category: 'north',
+                desc: 'Slow-cooked black lentils in a rich buttery gravy — comfort food at its finest.',
+                price: '₹200', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80', veg: 'veg' },
+            { name: 'Gobi Manchurian', category: 'chinese',
+                desc: 'Crispy cauliflower florets tossed in spicy tangy Manchurian sauce with bell peppers.',
+                price: '₹190', img: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&q=80', veg: 'veg' },
+            { name: 'Chicken Fried Rice', category: 'chinese',
+                desc: 'Wok-tossed rice with tender chicken, vegetables & a hint of soy — Indo-Chinese fusion.',
+                price: '₹240', img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Schezwan Noodles', category: 'chinese',
+                desc: 'Spicy Schezwan-style noodles with crunchy vegetables — a fiery favorite.',
+                price: '₹210', img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&q=80', veg: 'veg' },
+            { name: 'Tandoori Chicken', category: 'tandoor',
+                desc: 'Whole chicken marinated in yogurt & spices, roasted to perfection in a traditional tandoor.',
+                price: '₹380', img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Seekh Kebab', category: 'tandoor',
+                desc: 'Minced meat skewers with aromatic herbs, grilled over charcoal for a smoky flavor.',
+                price: '₹300', img: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Tandoori Roti', category: 'tandoor',
+                desc: 'Whole wheat flatbread baked in a clay tandoor — perfect with any curry.',
+                price: '₹40', img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=80', veg: 'veg' },
+            { name: 'Mango Lassi', category: 'beverages',
+                desc: 'Refreshing yogurt drink blended with sweet Alphonso mango & a hint of cardamom.',
+                price: '₹90', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80', veg: 'veg' },
+            { name: 'Masala Chai', category: 'beverages',
+                desc: 'Authentic Indian spiced tea brewed with ginger, cardamom & aromatic herbs.',
+                price: '₹50', img: 'https://images.unsplash.com/photo-1561336526-2914f13ceb0f?w=400&q=80', veg: 'veg' },
+            { name: 'Fresh Lime Soda', category: 'beverages',
+                desc: 'Zesty lime with sparkling soda — sweet, salted, or mixed. A perfect palate cleanser.',
+                price: '₹70', img: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&q=80', veg: 'veg' },
+            { name: 'Chicken 65', category: 'andhra',
+                desc: 'Spicy deep-fried chicken bites with curry leaves, green chilies & yogurt marinade.',
+                price: '₹260', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80',
+                veg: 'nonveg' },
+            { name: 'Palak Paneer', category: 'north',
+                desc: 'Creamy spinach puree with soft paneer cubes, tempered with garlic & cumin.',
+                price: '₹230', img: 'https://images.unsplash.com/photo-1618449840665-9ed506d73a34?w=400&q=80', veg: 'veg' },
+            { name: 'Egg Fried Rice', category: 'chinese',
+                desc: 'Classic fried rice with scrambled eggs, spring onions & a dash of soy sauce.',
+                price: '₹180', img: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80',
+                veg: 'nonveg' },
+        ];
+
+        const menuGrid = document.getElementById('menuGrid');
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        let activeCategory = 'all';
+
+        function renderMenu(category) {
+            menuGrid.innerHTML = '';
+            const filtered = category === 'all' ? menuItems : menuItems.filter(item => item.category ===
+                category);
+            filtered.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+                card.style.animationDelay = index * 0.05 + 's';
+                card.innerHTML = `
+                        <div class="menu-card-image" style="background-image:url('${item.img}')">
+                            <span class="veg-indicator ${item.veg}">${item.veg === 'veg' ? '🟢' : '🔴'}</span>
+                        </div>
+                        <div class="menu-card-body">
+                            <h4>${item.name}</h4>
+                            <p class="desc">${item.desc}</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-price">${item.price}</span>
+                                <button class="menu-add-btn" title="Add to order">+</button>
+                            </div>
+                        </div>
+                    `;
+                menuGrid.appendChild(card);
+                requestAnimationFrame(() => { card.style.opacity = '1'; });
+            });
+        }
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                menuTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                activeCategory = tab.dataset.category;
+                renderMenu(activeCategory);
+            });
+        });
+        renderMenu('all');
+
+        // ========== TOAST ==========
+        menuGrid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('menu-add-btn')) {
+                const card = e.target.closest('.menu-card');
+                const itemName = card.querySelector('h4').textContent;
+                showToast(`✅ "${itemName}" added to your order!`);
+                e.target.style.transform = 'scale(1.4)';
+                setTimeout(() => { e.target.style.transform = 'scale(1)'; }, 200);
+            }
+        });
+
+        function showToast(message) {
+            const existing = document.querySelector('.custom-toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    const offset = 75;
+                    const position = target.getBoundingClientRect().top + window.pageYOffset -
+                        offset;
+                    window.scrollTo({ top: position, behavior: 'smooth' });
+                }
+            });
+        });
+
+        console.log('🍽️ MathA VINDHUSHALA — Bright & Modern Website Ready!');
+        console.log('📍 Pasupala Convention Building, Gooty Rd, Anantapur, AP 515005');
+        console.log('📞 062811 22990 | ⭐ 4.5 (215 reviews)');
+    })();
+</script>
+</body>
+</html>
